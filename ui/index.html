@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drome</title>
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/plugins/animate/animate.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div id="viewport">
+
+
+
+        <div class="container-fluid view" id="loading-screen">
+            <img class="logo-center" src="assets/img/drone.svg" />
+        </div>
+
+        <div id="container-message-info" class="animated">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-cog fa-spin"></i> Loading configuration file
+                </div>
+            </div>
+
+        </div>
+
+        <div id="container-calibration" class="container-fluid view hidden">
+
+
+            <div class="card center-absolute ">
+
+                <div class="card-body">
+
+                    <div class="calibration-step" data-get="pitch-max" data-step="1">
+                        <h5 class="card-title">Pitch (Max)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the pitch, keep it at maximum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="pitch-min" data-step="2">
+                        <h5 class="card-title">Pitch (Min)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the pitch, keep it at minimum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="yaw-max" data-step="3">
+                        <h5 class="card-title">Yaw (Max)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the yaw, keep it at maximum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="yaw-min" data-step="4">
+                        <h5 class="card-title">Yaw (Min)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the yaw, keep it at minimum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="roll-max" data-step="5">
+                        <h5 class="card-title">Roll (Max)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the roll, keep it at maximum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="roll-min" data-step="6">
+                        <h5 class="card-title">Roll (Min)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the pitch, keep it at minimum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="gas-max" data-step="7">
+                        <h5 class="card-title">Gas (Max)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the pitch, keep it at maximum and press Next
+                        </p>
+                    </div>
+                    <div class="calibration-step" data-get="gas-min" data-step="8">
+                        <h5 class="card-title">Gas (Min)</h5>
+                        <p class="card-text">
+                            Choose the axis to use for the pitch, keep it at minimum and press Next
+                        </p>
+                    </div>
+
+                    <hr>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Axis</label>
+                        <select class="form-control" id="select-axis">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Raw value</label>
+                        <input type="text" class="form-control" id="value-axis-calibrate" placeholder="Value" readonly>
+                    </div>
+
+                    <button class="btn btn-primary btn-block btn-next-calibration">Next</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="container-calibration-test" class="container-fluid view hidden">
+            <div class="card internal-view" style="">
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 ">
+                            <div class="dronemodel">
+                            </div>
+                            <div class="gauges">
+                            </div>
+                            <div class="values">
+                                <div class="calibrating-value-test" data-test="pitch"></div>
+                                <div class="calibrating-value-test" data-test="yaw"></div>
+                                <div class="calibrating-value-test" data-test="roll"></div>
+                                <div class="calibrating-value-test" data-test="gas"></div>
+                            </div>
+                            <button class="btn btn-block" id="save-gamepad-settings-btn">Save Controller Settings</button>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label>Pitch Sensitivity</label>
+                                <input type="range" class="custom-range sensitivity-value" data-what="pitch" value="1"
+                                    min="0" max="1" step="0.1" id="pitch_sensitivity_calibration">
+                            </div>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input invert-axis-value" data-what="pitch"
+                                    id="pitch_need_inverted">
+                                <label class="custom-control-label " for="pitch_need_inverted"></label>Needs to be
+                                inverted?</label>
+                            </div>
+                            <hr class="m-t-b-3rem">
+
+                            <div class="form-group">
+                                <label>Roll Sensitivity</label>
+                                <input type="range" class="custom-range sensitivity-value" data-what="roll" value="1" min="0"
+                                    max="1" step="0.1" id="rollsensitivity_calibration">
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input invert-axis-value" data-what="roll"
+                                    id="roll_need_inverted">
+                                <label class="custom-control-label" for="roll_need_inverted"></label>Needs to be
+                                inverted?</label>
+                            </div>
+                            <hr class="m-t-b-3rem">
+
+                            <div class="form-group">
+                                <label>Yaw Sensitivity</label>
+                                <input type="range" class="custom-range sensitivity-value" data-what="yaw" value="1" min="0"
+                                    max="1" step="0.1" id="yaw_sensitivity_calibration">
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input invert-axis-value" data-what="yaw"
+                                    id="yaw_need_inverted">
+                                <label class="custom-control-label" for="yaw_need_inverted"></label>Needs to be
+                                inverted?</label>
+                            </div>
+                            <hr class="m-t-b-3rem">
+                            <div class="form-group">
+                                <label>Gas Sensitivity</label>
+                                <input type="range" class="custom-range sensitivity-value" value="1" min="0" max="1"
+                                    data-what="gas" step="0.1" id="gas_sensitivity_calibration">
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input invert-axis-value" data-what="gas"
+                                    id="gas_need_inverted">
+                                <label class="custom-control-label" for="gas_need_inverted"></label>Needs to be
+                                inverted?</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="container-fly-view" class="container-fluid view hidden">
+
+
+            <div id="battery-container" class="animated slideInLeft">
+                <div class="progress" style="width: 40px;
+                height: 22px; display: inline-block;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;  height: 22px;"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="progress" style="    width: 4px;
+                height: 15px;
+                display: inline-block;
+                line-height: 21px;
+                margin-bottom: 3px;
+                margin-left: -2px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;  height: 18px;"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <span class="percentage">99%</span>
+            </div>
+
+            <div id="rssi-container" class="animated slideInLeft">
+                <div class="bar-container red">
+                    <div class="bar"></div>
+                    <div class="bar l_2"></div>
+                    <div class="bar l_3"></div>
+                    <div class="bar l_4"></div>
+
+                </div>
+                <span class="value">-96dB</span>
+            </div>
+
+            <div id="board-fly-bottom" class="animated slideInUp">
+                <div id="gauge-power" ></div>
+
+                <div id="container-btn-arm-drone" class="center-absolute text-center">
+                    <div style="border: 10px solid #2c2f3c; border-radius: 50%; display:inline-block;">
+                        <button id="btn-arm-drone" class="rounded-circle btn btn-danger" data-toggle="tooltip"
+                            data-placement="top" title="Arm the drone">
+                            <i class="fas fa-power-off fa-2x"></i>
+                        </button>
+                    </div>
+                    <p style="margin-top: -10px;">ARM DRONE</p>
+                </div>
+                <button id="btn-go-settings" class="rounded-circle btn btn-light" data-toggle="tooltip" data-placement="top"
+                    title="Settings">
+                    <i class="fas fa-cogs fa-sm"></i>
+                </button>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+
+    <script src="assets/plugins/jquery/jquery-3.3.1.min.js"></script>
+    <script src="assets/plugins/popper/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/sweetalert/sweetalert.js"></script>
+    <script src="assets/plugins/polyfill/polyfill.js"></script>
+    <script src="assets/plugins/three/three.min.js"></script>
+    <script src="assets/plugins/three/webgl2.js"></script>
+    <script src="assets/plugins/justgauge/raphael-2.1.4.min.js"></script>
+    <script src="assets/plugins/justgauge/justgage.js"></script>
+    <!--<script src="assets/plugins/controller/Controller.min.js"></script>
+    <script src="assets/plugins/controller/Controller.layouts.min.js"></script>-->
+
+    <!-- <script src="assets/js/app.js"></script> -->
+    <script src="assets/js/drone3d.class.js"></script>
+    <script src="assets/js/controller.class.js"></script>
+    <script src="assets/js/bluetooth.class.js"></script>
+    <script src="assets/js/application.class.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
+
+</body>
+
+</html>
